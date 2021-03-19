@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  title: LoRaWAN Backend Interfaces components
+  version: 1.1.0
+paths: {}
+components:
+  schemas:
+    DeviceProfile:
+      type: object
+      properties:
+        VendorID:
+          type: integer
+          format: uint16
+        ProfileID:
+          type: integer
+          format: uint16
+        SupportsClassB:
+          type: boolean
+        ClassBTimeout:
+          type: integer
+          format: duration
+          description: Maximum delay for the end device to answer a MAC request or confirmed downlink frame (seconds).
+        PingSlotPeriod:
+          type: integer
+          description: Ping slot period (seconds)
+          enum: [32, 64, 128, 256, 512, 1024, 2048, 4096]
+        PingSlotDataRateIndex:
+          type: integer
+          format: uint8
+        PingSlotFrequency:
+          type: integer
+        SupportsClassC:
+          type: boolean
+        ClassCTimeout:
+          type: string
+          format: duration
+          description: Maximum delay for the end device to answer a MAC request or confirmed downlink frame (seconds)
+        MACVersion:
+          type: string
+          enum:
+            - "1.0"
+            - "1.0.1"
+            - "1.0.2"
+            - "1.0.3"
+            - "1.0.4"
+            - "1.1"
+        RegionalParametersVersion:
+          type: string
+          enum:
+            - "TS001-1.0"
+            - "TS001-1.0.1"
+            - "RP001-1.0.2"
+            - "RP001-1.0.2-RevB"
+            - "RP001-1.0.3-RevA"
+            - "RP001-1.1-RevA"
+            - "RP001-1.1-RevB"
+            - "RP002-1.0.0"
+            - "RP002-1.0.1"
+        SupportsJoin:
+          type: boolean
+          default: true
+        MaxEIRP:
+          type: integer
+          description: Maximum EIRP
+        Supports32bitFCnt:
+          type: boolean
