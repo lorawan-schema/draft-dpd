@@ -1,0 +1,50 @@
+openapi: 3.0.3
+info:
+  title: LoRaWAN Device Profile Download
+  description: This is a service to fetch device profiles for LoRaWAN.
+  version: 0.0.1
+externalDocs:
+  description: LoRa Alliance
+  url: 'https://www.lora-alliance.org'
+servers:
+  - url: /v1
+    variables: {}
+tags:
+  - name: profile
+    description: LoRaWAN Device Profiles
+paths:
+  '/profile/{vendorId}/{profileId}':
+    get:
+      tags:
+        - profile
+      summary: Find profile by LoRaWAN Vendor and Profile ID
+      description: Returns a LoRaWAN Device Profile
+      operationId: getProfileById
+      parameters:
+        - name: vendorId
+          in: path
+          description: Vendor ID issued by the LoRa Alliance
+          required: true
+          schema:
+            type: integer
+            format: uint16
+        - name: profileId
+          in: path
+          description: Vendor issued profile ID
+          required: true
+          schema:
+            type: integer
+            format: uint16
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: 'https://lorawan-schema.org/draft/dpd/1/ts002#/components/schemas/DeviceProfile'
+        '400':
+          description: Invalid Vendor or Profile ID supplied
+          content: {}
+        '404':
+          description: Profile not found
+          content: {}
